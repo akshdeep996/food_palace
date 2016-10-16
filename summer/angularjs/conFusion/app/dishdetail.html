@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="confusionApp">
+
+
+<body>
+
+    <div class="container">
+        <div class="row row-content"  ng-controller="dishDetailController as dishCtrl">
+            <div class="col-xs-12">
+                <div class="media" ng-repeat="dish in dishCtrl">
+                      <div class="media-left">
+                   <a href="#">
+                        <img class ="media-object" ng-src={{dish.image}} alt="uthapizza"/>
+                    </a>
+                       </div>
+                       <div class="media-body">
+                           <h2>
+                                <span class="label label-danger">{{dish.label}}
+                               </span>
+                                <span>{{dish.price | currency}}
+                               </span>
+                           </h2>
+                           <p> {{dish.description}} </p>
+                       
+            
+            
+                <ul class="media-list">
+                <h3> <b> Customer Comments:</b>  
+                       
+                        <h4> Sort By: <input type="text" ng-model="sorting">
+                         </h4>
+                    </h3>
+                    <li class="media" ng-repeat="item in dish.comments | orderBy:sorting">
+                         
+                    <blockquote>
+                        
+                        <p> {{item.rating}} <br/>
+                            {{item.comment}}
+                        <footer>{{item.author}} {{item.date | date:'medium'}}
+                        </footer>
+                        </p>
+                    </blockquote>                                       
+                </li>
+                </ul>      
+                    </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>
