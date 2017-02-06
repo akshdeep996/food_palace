@@ -1,6 +1,5 @@
 var ngannotate = require('gulp-ng-annotate');
 
-
 var gulp = require('gulp'),
     minifycss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
@@ -33,11 +32,21 @@ gulp.task('default', ['clean'], function() {
     gulp.start('usemin', 'imagemin','copyfonts');
 });
 
+
 gulp.task('usemin',['jshint'], function () {
   return gulp.src('./app/menu.html')
       .pipe(usemin({
         css:[minifycss(),rev()],
         js: [ngannotate(),uglify(),rev()]
+      }))
+      .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('usemin',['jshint'], function () {
+  return gulp.src('./app/menu.html')
+      .pipe(usemin({
+        css:[minifycss(),rev()],
+        js: [uglify(),rev()]
       }))
       .pipe(gulp.dest('dist/'));
 });
@@ -56,17 +65,26 @@ gulp.task('copyfonts', ['clean'], function() {
    gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
    .pipe(gulp.dest('./dist/fonts'));
 });
+gulp.task('browser-sync', ['default'], function () {
+   var files = [
+      'app/**/*.html',
+      'app/styles/**/*.css',
+      'app/images/**/*.png',
+      'app/scripts/**/*.js',
+      'dist/**/*'
+   ];
 
-
+   browserSync.init(files, {
+      server: {
+         baseDir: "dist",
+         index: "menu.html"
+      }
+   });
 // Watch
 gulp.task('watch', ['browser-sync'], function() {
   // Watch .js files
   gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/**/*.html}', ['usemin']);
-      // Watch image files
-  gulp.watch('app/images/**/*', ['imagemin']);
-
-});
-
+  
 gulp.task('browser-sync', ['default'], function () {
    var files = [
       'app/**/*.html',
@@ -85,3 +103,4 @@ gulp.task('browser-sync', ['default'], function () {
         // Watch any files in dist/, reload on change
   gulp.watch(['dist/**']).on('change', browserSync.reload);
     });
+       

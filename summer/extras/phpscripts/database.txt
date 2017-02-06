@@ -1,0 +1,14 @@
+1.create database
+2.create table name with fields as 
+
+	1. id
+	2. name
+	3. lname
+	4. username
+	5. email
+	6. password
+
+3. Now create register page in html .
+4. Now create register.php to connect to the database.
+	
+	
