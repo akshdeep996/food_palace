@@ -1,0 +1,48 @@
+package wwe;
+
+
+import java.applet.Applet;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class prg8a extends Applet implements MouseListener {
+    String color;    
+    public void init() {
+        // TODO start asynchronous download of heavy resources
+    color="red";
+    addMouseListener(this);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(color=="red"){
+            color="green";
+        }else{
+            color="red";
+        }
+        repaint();
+    }
+
+    @Override
+    public void paint(Graphics g) {
+         if(color=="red")
+    {
+        g.setColor(Color.red);
+        g.fillOval(100, 100, 100, 100);
+    }else{
+        g.setColor(Color.green);
+        g.fillOval(100, 100, 100, 100);
+    }
+    }
+    
+    @Override
+    public void mousePressed(MouseEvent e) {    }
+    @Override
+    public void mouseReleased(MouseEvent e) {    }
+    @Override
+    public void mouseEntered(MouseEvent e) {    }
+    @Override
+    public void mouseExited(MouseEvent e) {    }
+}

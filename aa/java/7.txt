@@ -1,0 +1,35 @@
+package wwe;
+
+/*<applet code=”Banner” width=500 height=500>
+<param name=”string1” value=”Nitte Meenakshi Institute of technology”>
+</applet>*/
+import java.applet.Applet;
+import java.awt.Graphics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+public class Banner extends Applet implements Runnable{
+    String msg; int x;
+    public void init() {
+        msg=getParameter("string1");
+        x=500;
+    new Thread(this).start();
+    }
+    public void paint(Graphics g) {
+    g.drawString(msg, x, 100);
+    }
+
+    public void run() {
+while(true){
+    if(x<=0)    
+    x=500;
+        else
+           x-=10;
+        repaint();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Banner.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    }
+}
